@@ -1,0 +1,109 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Music Artist</title>
+<script src="js/jquery-3.3.1.min.js"></script>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+<div id="artistSearch">
+	<div>
+		Artist Name: <input type="text" id="bandName" name="bandName" value="" />
+	</div>
+	<div>
+		Search Type: 
+		<select name="searchType" id="searchType" class="textField">
+			<option value="">Everything</option>
+			<option value="equals">Equals</option>
+			<option value="begins">Begins</option>
+			<option value="ends">Ends</option>
+			<option value="contains">Contains</option>
+		</select>
+	</div>
+	<div>
+		<input type="button" id="btnSearch" name="btnSubmit" value="Search" />
+	</div>
+</div>
+
+<div id="searchResults">
+	<table id="tblSearchResults">
+		<tr>
+			<th>First Name</th>
+			<th>Last Name</th>
+			<th>Band Name</th>
+		</tr>
+	</table>
+</div>
+
+</body>
+<script>
+	$(document).ready(function (){
+		$("#btnSearch").click(function (){
+			search();
+		});
+		$("#bandName").click(function(){
+			var keyPressed = $("#bandName").val();
+			if(keyPressed.length > 2){
+				search();
+			}
+			else{
+				$(".dataRow").remove();
+			}
+		});
+		
+		function search(optSearchType){
+			var bandName = $("#firstName").val();
+			var searchType = $("#searchType").val();
+			if(optSearchType === undefined){
+				searchType = $("#searchType").val();
+			}
+			else{
+				searchType = optSearchType;
+			}
+		}
+			// console.log("bandName: " + bandName);
+			// console.log("SearchType: " + searchType);
+			var url = "ArtistListWS?bandName=" + bandName + "&searchType=" + searchType;
+			// console.log(url);
+			$.get(url, function(data){
+				console.log(data);
+				parseGenreData(data);
+			})
+	}
+	
+	function parseArtistData(data){
+		// $("#searchResults").text(JSON.stringify(data));
+		$(".dataRow").remove();
+		var result = "";
+		
+		for(var i=0; i < data.length; i++){
+			var tr = $("<tr></tr>"); // created empty html table row
+			tr.attr({"class": "dataRow"});
+			// First data cell
+			var td = $("<td></td>"); // created empty html table data
+			td.html(data[i].first_name);
+			tr.append(td);
+			
+				// Second data cell
+			// Note that we don't need to redeclare this
+			td = $("<td></td>");
+			td.html(data[i].last_name);
+			tr.append(td);
+			
+			// Third data cell
+			td = $("<td></td>");
+			td.html(data[i].band_name);
+			tr.append(td);
+			
+			
+			// Append row to the table
+			$("#tblSearchResults").append(tr);
+			
+			
+		}
+		
+		// $("#searchResults").html(result);
+	}
+</script>
+</html>

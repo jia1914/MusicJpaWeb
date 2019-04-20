@@ -16,13 +16,12 @@ import javax.swing.table.DefaultTableModel;
  * 1. Retrieving data sets from MySQL databases. 
  * 2. For executing UPDATE, INSERT, DELETE queries 
  * 3. For building tables to populate data grids (JTable)
- * @author Dmitriy Babichenko
- * @version 1.1
  */
 public class DbUtilities {
 
     private Connection conn = null; // connection object
-    private String hostName = "sis-teach-01.sis.pitt.edu:3306"; // server address + port number
+    private String hostName = "sis-teach-01.sis.pitt.edu"; // server address + port number
+    //private String hostName = "localhost:8080";
     private String dbName = "music2019"; // default database name
     private String dbUserName = "infsci1017_2019"; // login name for the database server
     private String dbPassword = "infsci1017_2019!"; // password for the database server
@@ -180,5 +179,8 @@ public class DbUtilities {
 		}
 		return new DefaultTableModel(data, columnNames);
 	}
-    
+    //this method was added to establish connection for preparedstatements in the classes
+	public Connection getConn() {
+		return conn;
+	}
 }

@@ -9,7 +9,7 @@ import org.json.JSONArray;
 public class ArtistManager {
 	
 	public JSONArray getArtistList(String searchTerm, String searchType){
-		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Music");
+		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("MusicJpaWeb");
 		EntityManager em = emFactory.createEntityManager();
 		
 		// Note that you are querying the object grid, not the database!
@@ -69,7 +69,7 @@ public class ArtistManager {
 
 	
 	public void createArtist(String artistID, String firstName, String lastName, String bandName, String bio) {
-		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Music");
+		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("MusicJpaWeb");
 		EntityManager em = emFactory.createEntityManager();
 		
 		em.getTransaction().begin();
@@ -89,7 +89,7 @@ public class ArtistManager {
 	
 
 	public void updateArtist(String artistID, String firstName, String lastName, String bandName, String bio) {
-		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Music");
+		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("MusicJpaWeb");
 		EntityManager em = emFactory.createEntityManager();
 		em.getTransaction().begin();
 		
@@ -119,7 +119,7 @@ public class ArtistManager {
 	
 
 	public void deleteArtist(String artistID) {
-		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Music");
+		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("MusicJpaWeb");
 		EntityManager em = emFactory.createEntityManager();
 		em.getTransaction().begin();
 		
@@ -132,7 +132,7 @@ public class ArtistManager {
 	
 
 	public Artist findArtist(String artistID) {
-		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Music");
+		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("MusicJpaWeb");
 		EntityManager em = emFactory.createEntityManager();
 		em.getTransaction().begin();
 		
@@ -145,7 +145,7 @@ public class ArtistManager {
 
 
 	public Artist getArtist(String artistID){
-		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Music");
+		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("MusicJpaWeb");
 		EntityManager em = emFactory.createEntityManager();
 		em.getTransaction().begin();
 		Artist a = em.find(Artist.class, artistID);

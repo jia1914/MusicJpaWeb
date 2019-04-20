@@ -13,7 +13,7 @@ import org.json.JSONObject;
 public class AlbumManager {
 	
 	public JSONArray getAlbumList(String searchTerm, String searchType){
-		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Music");
+		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("MusicJpaWeb");
 		EntityManager em = emFactory.createEntityManager();
 		
 		// Note that you are querying the object grid, not the database!
@@ -49,7 +49,7 @@ public class AlbumManager {
 	
 	
 	public void createAlbum(String albumID, String title, String releaseDate, String coverImagePath, String recordingCompanyName, int numberOfTracks, String pmrcRating, int length) {
-		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Music");
+		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("MusicJpaWeb");
 		EntityManager em = emFactory.createEntityManager();
 		
 		em.getTransaction().begin();
@@ -72,7 +72,7 @@ public class AlbumManager {
 	
 
 	public void updateAlbum(String albumID, String title, String releaseDate, String coverImagePath, String recordingCompanyName, int numberOfTracks, String pmrcRating, int length) {
-		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Music");
+		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("MusicJpaWeb");
 		EntityManager em = emFactory.createEntityManager();
 		em.getTransaction().begin();
 		
@@ -115,7 +115,7 @@ public class AlbumManager {
 	
 
 	public void deleteAlbum(String albumID) {
-		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Music");
+		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("MusicJpaWeb");
 		EntityManager em = emFactory.createEntityManager();
 		em.getTransaction().begin();
 		
@@ -128,7 +128,7 @@ public class AlbumManager {
 	
 
 	public Album findAlbum(String albumID) {
-		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Music");
+		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("MusicJpaWeb");
 		EntityManager em = emFactory.createEntityManager();
 		em.getTransaction().begin();
 		
@@ -141,7 +141,7 @@ public class AlbumManager {
 
 
 	public Album getAlbum(String albumID){
-		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Music");
+		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("MusicJpaWeb");
 		EntityManager em = emFactory.createEntityManager();
 		em.getTransaction().begin();
 		Album l = em.find(Album.class, albumID); 

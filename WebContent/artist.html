@@ -3,7 +3,6 @@
 <meta charset="UTF-8">
 <title>Music Artist</title>
 <script src="js/jquery-3.3.1.min.js"></script>
-<link href="css/style.css" rel="stylesheet" type="text/css" />
 
 </head>
 <body>
@@ -13,7 +12,7 @@
 	</div>
 	<div>
 		Search Type: 
-		<select name="searchType" id="searchType" class="textField">
+		<select name="searchType" id="searchType">
 			<option value="">Everything</option>
 			<option value="equals">Equals</option>
 			<option value="begins">Begins</option>
@@ -29,9 +28,9 @@
 <div id="searchResults">
 	<table id="tblSearchResults">
 		<tr>
+			<th>Band Name</th>
 			<th>First Name</th>
 			<th>Last Name</th>
-			<th>Band Name</th>
 		</tr>
 	</table>
 </div>
@@ -42,7 +41,7 @@
 		$("#btnSearch").click(function (){
 			search();
 		});
-		$("#bandName").click(function(){
+		$("#bandName").keyup(function(){
 			var keyPressed = $("#bandName").val();
 			if(keyPressed.length > 2){
 				search();
@@ -53,15 +52,14 @@
 		});
 		
 		function search(optSearchType){
-			var bandName = $("#firstName").val();
-			var searchType = $("#searchType").val();
+			var bandName = $("#bandName").val();
+			var searchType = "";
 			if(optSearchType === undefined){
 				searchType = $("#searchType").val();
 			}
 			else{
 				searchType = optSearchType;
 			}
-		}
 			// console.log("bandName: " + bandName);
 			// console.log("SearchType: " + searchType);
 			var url = "ArtistListWS?bandName=" + bandName + "&searchType=" + searchType;
@@ -82,18 +80,18 @@
 			tr.attr({"class": "dataRow"});
 			// First data cell
 			var td = $("<td></td>"); // created empty html table data
-			td.html(data[i].first_name);
+			td.html(data[i].band_name);
 			tr.append(td);
 			
 				// Second data cell
 			// Note that we don't need to redeclare this
 			td = $("<td></td>");
-			td.html(data[i].last_name);
+			td.html(data[i].first_name);
 			tr.append(td);
 			
 			// Third data cell
 			td = $("<td></td>");
-			td.html(data[i].band_name);
+			td.html(data[i].last_name);
 			tr.append(td);
 			
 			
@@ -106,4 +104,5 @@
 		// $("#searchResults").html(result);
 	}
 </script>
+
 </html>

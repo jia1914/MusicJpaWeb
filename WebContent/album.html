@@ -1,19 +1,18 @@
-	<html>
+<!DOCTYPE html>
+<html>
 <head>
 <meta charset="UTF-8">
 <title>Music Album</title>
 <script src="js/jquery-3.3.1.min.js"></script>
-<link href="css/style.css" rel="stylesheet" type="text/css" />
-
 </head>
 <body>
 <div id="albumSearch">
 	<div>
-		Album Title: <input type="text" id="title" name="title" value="" class="textField" />
+		Album Title: <input type="text" id="title" name="title" value="" />
 	</div>
 	<div>
 		Search Type: 
-		<select name="searchType" id="searchType" class="textField">
+		<select name="searchType" id="searchType">
 			<option value="">Everything</option>
 			<option value="equals">Equals</option>
 			<option value="begins">Begins</option>
@@ -30,12 +29,7 @@
 	<table id="tblSearchResults">
 		<tr>
 			<th>Album Title</th>
-			<th>Release Date</th>
-			<th>Cover Image Path</th>
-			<th>Recording Company Name</th>
-			<th>Number of Tracks</th>
-			<th>PMRC Rating</th>
-			<th>Length</th>
+		    <th>Album ID</th>
 		</tr>
 	</table>
 </div>
@@ -61,7 +55,7 @@
 
 	function search(optSearchType){
 			var title = $("#title").val();
-			var searchType = $("#searchType").val();
+			var searchType = "";
 			// console.log("Album: " + title);
 			// console.log("SearchType: " + searchType);
 			if(optSearchType === undefined){
@@ -70,15 +64,13 @@
 			else{
 				searchType = optSearchType;
 			}
-			var url = "AlbumListWS?albumTitle=" + albumTitle + "&searchType=" + searchType;
+			var url = "AlbumListWS?title=" + title + "&searchType=" + searchType;
 			// console.log(url);
 			$.get(url, function(data){
 				console.log(data);
 				parseGenreData(data);
 			})
-		});
-	});
-	
+	}
 	function parseAlbumData(data){
 		// $("#searchResults").text(JSON.stringify(data));
 		$(".dataRow").remove();
@@ -95,34 +87,8 @@
 				// Second data cell
 			// Note that we don't need to redeclare this
 			td = $("<td></td>");
-			td.html(data[i].release_date);
+			td.html(data[i].album_id);
 			tr.append(td);
-			
-			// Third data cell
-			td = $("<td></td>");
-			td.html(data[i].cover_image_path);
-			tr.appedn(td);
-			
-			//Fourth data cell
-			td = $("<td></td>");
-			td.html(data[i].recording_company_name);
-			tr.append(td);
-			
-			//Fifth data cell
-			td =$("<td></td>");
-			td.html(data[i].number_of_tracks);
-			tr.append(td);
-			
-			//Sixth data cell
-			td = $("<td></td>");
-			td.html(data[i].PMRC_rating);
-			tr.append(td);
-			
-			//Seventh data cell
-			td = $("<td></td>");
-			td.html(data[i].length);
-			tr.append(td);
-			
 			
 			// Append row to the table
 			$("#tblSearchResults").append(tr);
